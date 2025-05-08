@@ -1,3 +1,32 @@
-.classpath
+# 인텔리제이(IntelliJ) 관련 무시 항목
+.idea/
+*.iml
+*.ipr
+*.iws
+out/  # 인텔리제이 기본 빌드 출력 디렉토리
+
+# 이클립스(Eclipse) 관련 무시 항목
 .project
-bin/
+.classpath
+.settings/
+bin/  # 이클립스 기본 빌드 출력 디렉토리
+
+# 공통 무시 항목
+# 1. 컴파일된 자바 클래스 파일
+*.class
+
+# 2. 로컬 환경/임시 파일
+*.log
+*.tmp
+*.swp
+*.bak
+*.orig
+
+# 3. OS/에디터별 파일
+.DS_Store       # macOS
+Thumbs.db       # Windows
+*.nfs*          # Network File System 잠금 파일
+
+# 4. 빌드/실행 관련 (메이븐/그레이들 미사용 시 생략 가능)
+/target/        # 메이븐 기본 빌드 디렉토리 (혹시 모를 경우)
+/build/         # 그레이들 빌드 디렉토리 (혹시 모를 경우)
