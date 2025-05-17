@@ -21,52 +21,8 @@ package string.ex;
  평균 나이: 29.0세
 */
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StringEx5 {
     public static void main(String[] args) {
-
-//         String csvData = "John,25,john@example.com\n" +
-//                        "Sarah,31,sarah@example.com\n" +
-//                        "Mike,18,mike@example.com\n" +
-//                        "Lisa,42,lisa@example.com";
-//
-//         String[] users = csvData.split("\n");
-//
-//         final int ROWS = users.length;
-//         final int COLS = users[0].split(",").length;
-//
-//         String[][] info = new String[ROWS][COLS];
-//
-//         for (int i = 0; i < ROWS; i++) {
-//             for(int j = 0; j < COLS; j++) {
-//                 info[i][j] = users[i].split(",")[j];
-//             }
-//         }
-//
-//         List<String> formattedInfo = new ArrayList<>();
-//
-//         for (int i = 0; i < ROWS; i++) {
-//
-//             String formatted = String.format("사용자 %d: 이름: %s, 나이: %s세, 이메일: %s",
-//                     i + 1, info[i][0], info[i][1], info[i][2]);
-//
-//             formattedInfo.add(formatted);
-//         }
-//
-//         int sum = 0;
-//         for (int i = 0; i < ROWS; i++) {
-//             sum += Integer.parseInt(info[i][1]);
-//         }
-//         double average = (double) sum / ROWS;
-//
-//         String averageAge = String.format("평균 나이: %.1f세", average);
-//
-//         formattedInfo.add(averageAge);
-//
-//         String result = String.join("\n", formattedInfo);
-//         System.out.println(result);
 
         String csvData = "John,25,john@example.com\n" +
                 "Sarah,31,sarah@example.com\n" +
