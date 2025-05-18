@@ -10,7 +10,7 @@ public class ShapeManager<T extends Shape> {
         shapes.add(shape);
     }
 
-    public void printShapes() {
+    public void printShapes(){
         shapes.forEach(s -> System.out.println(s.getName()));
     }
 }
