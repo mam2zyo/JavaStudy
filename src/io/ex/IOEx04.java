@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Ex0516 {
+public class IOEx04 {
 
     public static void writeFile(String filename) {
         try (FileWriter writer = new FileWriter(filename);
@@ -35,12 +35,12 @@ public class Ex0516 {
         try (FileReader reader = new FileReader(filename)) {
 
             char[] buffer = new char[1024];
-            int chrsRead;
+            int charsRead;
 
             System.out.println("파일 내용:");
 
-            while ((chrsRead = reader.read(buffer)) != -1) {
-                String str = new String(buffer, 0, chrsRead);
+            while ((charsRead = reader.read(buffer)) != -1) {
+                String str = new String(buffer, 0, charsRead);
                 System.out.print(str);
             }
             System.out.println();
