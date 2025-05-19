@@ -19,7 +19,19 @@ import java.util.List;
 public class StringEx6 {
     public static void main(String[] args) {
         String[] words = {"java", "PYTHON", "JavaScript", "c++", "rUbY"};
+        List<String> target = new ArrayList<>();
 
+        for (String word : words) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(Character.toUpperCase(word.charAt(0)))
+                   .append(word.toLowerCase().substring(1));
+            target.add(builder.toString());
+        }
+
+        System.out.println("원본 배열: " + Arrays.asList(words));
+        System.out.println("변환 결과: " + target);
+
+        /*
         List<String> origin = Arrays.asList(words);
         List<String> target = new ArrayList<>();
 
@@ -31,5 +43,6 @@ public class StringEx6 {
 
         System.out.println("원본 배열: " + origin);
         System.out.println("변환 결과: " + target);
+        */
     }
 }
