@@ -17,8 +17,8 @@ public class BufferedFileWriterExample {
              BufferedWriter bw = new BufferedWriter(fw)) {
 
             for (String line : lines) {
-                bw.write(line);
-                bw.newLine();
+                bw.write(line);     // 문자열 쓰기
+                bw.newLine();       // 새 줄 문자 쓰기 (플랫폼 독립적)
             }
 
             System.out.println("파일 '" + filename + "'에 성공적으로 " +
