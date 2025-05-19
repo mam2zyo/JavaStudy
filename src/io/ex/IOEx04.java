@@ -58,7 +58,6 @@ public class IOEx04 {
         String filename = "my_diary.txt";
 
         writeFile(filename);
-
         readFile(filename);
     }
 }
