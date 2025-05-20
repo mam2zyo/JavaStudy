@@ -12,3 +12,5 @@ out/
 *.zip
 *.tar.gz
 *.rar
+
+students.dat
