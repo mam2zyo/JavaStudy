@@ -1,5 +1,6 @@
 package quiz;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class PrintOut<T> implements Consumer<T> {
@@ -16,5 +17,9 @@ public class PrintOut<T> implements Consumer<T> {
     @Override
     public void accept(T t) {
         System.out.println(t);
+    }
+
+    public static void main(String[] args) {
+        Optional<String> names;
     }
 }
