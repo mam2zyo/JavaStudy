@@ -1,5 +1,17 @@
 package io.ex;
 
+/*
+    다음 요구사항을 만족하는 Java 프로그램을 작성해 보세요.
+
+    1. 사용자로부터 여러 줄의 텍스트를 입력받습니다.
+       사용자가 특정 단어(예: "exit")를 입력할 때까지 계속 입력을 받습니다. (Scanner의 nextLine() 사용)
+    2. 입력받은 모든 텍스트 내용을 "my_diary.txt" 라는 파일에 저장합니다.
+       각 줄은 파일에도 개행되어 저장되어야 합니다.
+    3. 파일 저장이 완료되면, 저장된 "my_diary.txt" 파일의 내용을 다시 읽어와 콘솔에 그대로 출력합니다.
+    4. FileWriter와 FileReader를 사용하세요.
+    5. 모든 I/O 작업은 try-with-resources를 사용하고, 적절한 예외 처리를 포함하세요.
+*/
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -26,6 +38,7 @@ public class IOEx04 {
             }
             System.out.println("파일 쓰기 완료");
         } catch (IOException e) {
+            System.err.println("파일 쓰기 오류: " + e.getMessage());
             e.printStackTrace();
         }
         System.out.println();
@@ -46,10 +59,9 @@ public class IOEx04 {
             System.out.println();
 
         } catch (FileNotFoundException e) {
-            System.err.println("파일을 찾지 못했습니다.");
-            e.printStackTrace();
+            System.err.println("파일 찾기 오류: " + e.getMessage());
         } catch (IOException e) {
-            System.err.println("파일 읽기 오류");
+            System.err.println("파일 읽기 오류: " + e.getMessage());
             e.printStackTrace();
         }
     }
