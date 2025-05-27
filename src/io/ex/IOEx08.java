@@ -188,7 +188,8 @@ public class IOEx08 {
 
         } catch (IOException e) {
             System.err.println("객체 직렬화 중 오류: " + e.getMessage());
-            throw new RuntimeException("객체를 파일에 쓰는 중 오류");
+            e.printStackTrace();
+            return false;
         }
     }
 
