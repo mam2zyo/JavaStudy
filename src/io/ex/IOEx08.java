@@ -87,8 +87,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 @Getter
 @AllArgsConstructor
@@ -117,17 +119,173 @@ class Contact implements Serializable {
     @Override
     public String toString() {
         return String.format("이름: %s, 전화번호: %s, 이메일: %s, 메모: %s",
-                name, phoneNumber, email == null ? "" : email, memo == null ? "" : memo);
+                name, phoneNumber, email == null ? "" : email, memo == null ? "null" : memo);
     }
 }
 
 
 
 public class IOEx08 {
+    private static List<Contact> contacts = new ArrayList<>();
+    private static String filename = "contacts.dat";
+    private static String exportedTextFile = "contacts_export.txt";
+
+    public static void addContact(Scanner scanner) {
+
+        System.out.print("이름: ");
+        String name = scanner.nextLine();
+        System.out.print("전화번호: ");
+        String number = scanner.nextLine();
+        System.out.print("이메일 (없으면 Enter): ");
+        String email = scanner.nextLine();
+        System.out.print("메모 (없으면 Enter): ");
+        String memo = scanner.nextLine();
+
+        if (name.isBlank() || number.isBlank()) {
+            System.out.println("이름과 전화번호는 공백일 수 없습니다.");
+            return;
+        }
+
+        if (memo.isBlank()) {
+            if (email.isBlank()) {
+                contacts.add(new Contact(name, number));
+            } else {
+                contacts.add(new Contact(name, number, email));
+            }
+        } else {
+            if (email.isBlank()) {
+                contacts.add(new Contact(name, number, "", memo));
+            } else {
+                contacts.add(new Contact(name, number, email, memo));
+            }
+        }
+        System.out.println("연락처가 추가되었습니다.");
+    }
+
+    public static void showContacts() {
+
+        if (contacts.isEmpty()) {
+            System.out.println("연락처가 비어있습니다.");
+            return;
+        }
+
+        for (int i = 0; i < contacts.size(); i++) {
+            System.out.println((i + 1) + ". " + contacts.get(i));
+        }
+    }
+
+    public static boolean serializeContacts() {
+        try (FileOutputStream fos = new FileOutputStream(filename);
+             BufferedOutputStream bos = new BufferedOutputStream(fos);
+             ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+
+            oos.writeObject(contacts);
+
+            System.out.println("연락처를 '" + filename + "' 파일에" +
+                    "성공적으로 저장했습니다.");
+
+            return true;
+
+        } catch (IOException e) {
+            System.err.println("객체 직렬화 중 오류: " + e.getMessage());
+            throw new RuntimeException("객체를 파일에 쓰는 중 오류");
+        }
+    }
+
+
+    public static boolean deserializeContacts() {
+        try (FileInputStream fis = new FileInputStream(filename);
+             BufferedInputStream bis = new BufferedInputStream(fis);
+             ObjectInputStream ois = new ObjectInputStream(bis)) {
+
+            contacts = (List<Contact>) ois.readObject();
+            System.out.println("'" + filename + "' 파일에서 연락처를 메모리에 로드했습니다.");
+            return true;
+
+        } catch (FileNotFoundException e) {
+            System.err.println(filename + "을(를) 찾을 수 없습니다." + e.getMessage());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            System.err.println("클래스를 찾을 수 없습니다." + e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("역직렬화 중 오류: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public static boolean exportContactsToText() {
+        try (FileWriter fw = new FileWriter(exportedTextFile);
+             BufferedWriter bw = new BufferedWriter(fw)) {
+
+            for (Contact contact : contacts) {
+                bw.write(contact.toString());     // 문자열 쓰기
+                bw.newLine();       // 새 줄 문자 쓰기 (플랫폼 독립적)
+            }
+
+            System.out.println("연락처를 " + exportedTextFile + "파일로 내보내기 성공");
+            return true;
+
+        } catch (IOException e) {
+            System.err.println("파일 쓰기 중 오류 발생: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
 
+        while (true) {
+            System.out.println("연락처 관리 프로그램");
+            System.out.println("--------------------");
+            System.out.println("1. 연락처 추가");
+            System.out.println("2. 연락처 목록 보기");
+            System.out.println("3. 연락처 파일로 저장");
+            System.out.println("4. 연락처 파일에서 불러오기");
+            System.out.println("5. 연락처 텍스트 파일로 내보내기");
+            System.out.println("0. 종료");
+            System.out.println("--------------------");
+            System.out.print("메뉴를 선택하세요: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+
+                case 1:
+                    addContact(scanner);
+                    break;
+
+                case 2:
+                    showContacts();
+                    break;
+
+                case 3:
+                    serializeContacts();
+                    break;
+
+                case 4:
+                    deserializeContacts();
+                    break;
+
+                case 5:
+                    exportContactsToText();
+                    break;
+
+                case 0:
+                    serializeContacts();
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("번호 입력 오류");
+
+            }
+        }
     }
 }
