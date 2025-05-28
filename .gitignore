@@ -4,6 +4,7 @@ out/
 
 *.class
 *.log
+*.dat
 
 # Package Files #
 *.war
@@ -13,4 +14,3 @@ out/
 *.tar.gz
 *.rar
 
-.dat
