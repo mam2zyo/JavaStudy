@@ -47,7 +47,7 @@ public class StringEx9 {
 
     public static String getLogLevel(String logLine) {
         for (String level : LOG_LEVELS) {
-            if (logLine.contains(level)) return level;
+            if (logLine.contains(" " + level + " ")) return level;
         }
         return null;
     }

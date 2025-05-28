@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 /*
- 중복 이름 찾기
- 문제 설명
  사용자 이름 목록이 담긴 List<String>이 주어졌을 때,
  중복된 이름만 찾아서 한 번씩만 담은 리스트를 반환하는 메서드를 작성하세요.
 
