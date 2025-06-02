@@ -45,71 +45,74 @@ public class StringEx9 {
         String message;
     }
 
-    public static String getLogLevel(String logLine) {
-        for (String level : LOG_LEVELS) {
-            if (logLine.contains(" " + level + " ")) return level;
-        }
-        return null;
-    }
 
-    public static String getTimeStamp(String logLine) {
-        String level = getLogLevel(logLine);
-        if (level == null) return "";
-        String timeStamp = logLine.substring(0, logLine.indexOf(level)).trim();
-        return timeStamp;
-    }
+    public static List<LogEntry> parseLogData(String logData) {
 
-    public static String getMessage(String logLine) {
-        String level = getLogLevel(logLine);
-        if (level == null) return "";
-        String message = logLine.substring(logLine.indexOf(level) + level.length() + 1).trim();
-        return message;
-    }
+        String[] logLines = logData.split("\n");
+        List<LogEntry> logEntries = new ArrayList<>();
 
-    public static void filterLog(List<LogEntry> logList, String logLevel) {
+        for (String line : logLines) {
 
-        List<LogEntry> filteredList = new ArrayList<>();
+            String level = "";
 
-        for (LogEntry log : logList) {
-            if (log.getLevel().equals(logLevel)) {
-                filteredList.add(log);
+            for (String logLevel : LOG_LEVELS) {
+                if (line.contains(" " + logLevel + " ")) {
+                    level = logLevel;
+                }
             }
+            
+            if (level.isEmpty()) continue; // level 파싱 실패시 다음 라인
+
+            String timestamp =
+                    line.substring(0, line.indexOf(level)).trim();
+            String message =
+                    line.substring(line.indexOf(level) + level.length() + 1).trim();
+
+            logEntries.add(new LogEntry(timestamp, level, message));
         }
 
-        filteredList.sort((a, b) -> a.timestamp.compareTo(b.timestamp));
+        System.out.printf("총 %d라인 중 %d라인 파싱 성공\n",
+                logLines.length, logEntries.size());
 
-        System.out.println("=== " + logLevel + " 로그 분석 결과 ===");
-        for (LogEntry log : filteredList) {
-            String time = "[" + log.timestamp.split(" ")[1] + "]";
+        List<LogEntry> sortedLogEntries = new ArrayList<>(logEntries);
+        sortedLogEntries.sort((a, b) -> a.timestamp.compareTo(b.timestamp));
+
+        return sortedLogEntries;
+    }
+
+
+    public static void printErrorLog(List<LogEntry> logEntries) {
+
+        List<LogEntry> errorLogs = new ArrayList<>();
+
+        for (LogEntry log : logEntries) {
+            if (log.getLevel().equals("ERROR")) errorLogs.add(log);
+        }
+
+        System.out.println("=== ERROR 로그 분석 결과 ===");
+        for (LogEntry log : errorLogs) {
             StringJoiner sj = new StringJoiner(" ");
+            String time = "[" + log.timestamp.split(" ")[1] + "]";
             sj.add(time);
-            sj.add(log.message);
+            sj.add(log.getMessage());
             System.out.println(sj.toString());
         }
-        System.out.println("총 " + logLevel + " 개수: " + filteredList.size() + "개");
+        System.out.printf("총 ERROR 개수: %d개\n", errorLogs.size());
     }
 
 
     public static void main(String[] args) {
-        String logData = "2023-05-15 14:30:25 INFO 사용자 로그인 성공\n" +
-                "2023-05-15 14:32:10 ERROR 데이터베이스 연결 실패\n" +
-                "2023-05-15 14:25:45 WARN 메모리 사용량 80% 초과\n" +
-                "2023-05-15 14:35:20 ERROR 파일 읽기 권한 없음\n" +
-                "2023-05-15 14:28:15 INFO 백업 작업 완료\n" +
-                "2023-05-15 14:40:30 ERROR 네트워크 타임아웃";
+        String logData = """
+                2023-05-15 14:30:25 INFO 사용자 로그인 성공
+                2023-05-15 14:32:10 ERROR 데이터베이스 연결 실패
+                2023-05-15 14:25:45 WARN 메모리 사용량 80% 초과
+                2023-05-15 14:35:20 ERROR 파일 읽기 권한 없음
+                2023-05-15 14:28:15 INFO 백업 작업 완료
+                2023-05-15 14:40:30 ERROR 네트워크 타임아웃
+                """;
 
-        String[] logLines = logData.split("\n");
+        List<LogEntry> logEntries = parseLogData(logData);
+        printErrorLog(logEntries);
 
-        List<LogEntry> logList = new ArrayList<>();
-
-        for (String line : logLines) {
-            String stamp = getTimeStamp(line);
-            String level = getLogLevel(line);
-            String message = getMessage(line);
-
-            logList.add(new LogEntry(stamp, level, message));
-        }
-
-        filterLog(logList, "ERROR");
     }
 }
