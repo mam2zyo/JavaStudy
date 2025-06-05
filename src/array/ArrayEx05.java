@@ -1,6 +1,6 @@
 package array;
 
-/*
+/*  예제
     public class ArrayRotationExample {
         public static void main(String[] args) {
             // 배열 선언 및 초기화
@@ -42,7 +42,7 @@ package array;
 */
 
 
-/*
+/*  문제
     6개의 정수로 이루어진 배열을 생성하고, 1~30 사이의 랜덤 정수로 초기화하세요.
     사용자가 입력한 숫자 k만큼 배열을 오른쪽으로 회전한 뒤, 원본 배열과 회전된 배열을 출력하세요.
     Arrays.toString()을 사용해 배열을 출력하세요.
@@ -77,11 +77,13 @@ public class ArrayEx05 {
             throw new IllegalArgumentException("k must be positive integer");
         }
 
-        k = k % arr.length;
-        int[] rotatedArr = new int[arr.length];
+        int length = arr.length;
 
-        for (int i = 0; i < arr.length; i++) {
-            rotatedArr[i] = arr[(i + arr.length - k) % arr.length];
+        k = k % length;
+        int[] rotatedArr = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            rotatedArr[i] = arr[(i + length - k) % length];
         }
 
         return rotatedArr;

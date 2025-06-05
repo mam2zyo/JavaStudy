@@ -1,8 +1,31 @@
 package array;
 
-/*
-    10개의 정수로 이루어진 배열을 생성하고, 1부터 100 사이의 랜덤 숫자( Math.random() 사용)로 초기화한 뒤,
-    배열에서 가장 큰 숫자를 찾아 출력하는 자바 프로그램을 작성하세요. 배열과 가장 큰 숫자를 출력해야 합니다.
+/*  예제
+    public class BasicArrayExample {
+        public static void main(String[] args) {
+            // 정수 배열 선언 및 초기화
+            int[] numbers = {10, 20, 30, 40, 50};
+
+            // 요소 합 계산
+            int sum = 0;
+            for (int i = 0; i < numbers.length; i++) {
+                sum += numbers[i];
+            }
+
+            // 배열과 합 출력
+            System.out.println("배열 요소:");
+            for (int num : numbers) {
+                System.out.print(num + " ");
+            }
+            System.out.println("\n합계: " + sum);
+        }
+}
+*/
+
+/*  문제
+    10개의 정수로 이루어진 배열을 생성하고, 1부터 100 사이의 랜덤 숫자( Math.random() 사용)로
+    초기화한 뒤, 배열에서 가장 큰 숫자를 찾아 출력하는 자바 프로그램을 작성하세요.
+    배열과 가장 큰 숫자를 출력해야 합니다.
 
     예상 출력 예시:
     배열: [45, 12, 89, 34, 67, 23, 91, 56, 78, 19]

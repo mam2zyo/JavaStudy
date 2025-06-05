@@ -17,16 +17,5 @@ public class StringEx1 {
                 noSpaces.substring(1);  // 첫글자 대문자, concat
 
         System.out.println(result);
-
-//        String[] helloArr = hello.split("");
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append(helloArr[0].toUpperCase());
-//        for (int i = 1; i < helloArr.length; i++) {
-//            if(!helloArr[i].equals(" ")) {
-//                sb.append(helloArr[i]);
-//            }
-//        }
-//        System.out.println(sb);
     }
 }

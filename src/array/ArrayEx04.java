@@ -1,6 +1,33 @@
 package array;
 
-/*
+
+/*  예제
+    public class ArraySortExample {
+        public static void main(String[] args) {
+            // 배열 선언 및 초기화
+            int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+
+            // 배열 정렬
+            Arrays.sort(numbers);
+
+            // 정렬된 배열 출력
+            System.out.println("정렬된 배열: " + Arrays.toString(numbers));
+
+            // 이진 탐색으로 25 찾기
+            int searchKey = 25;
+            int index = Arrays.binarySearch(numbers, searchKey);
+
+            // 결과 출력
+            if (index >= 0) {
+                System.out.println(searchKey + "는 배열의 인덱스 " + index + "에 있습니다.");
+            } else {
+                System.out.println(searchKey + "는 배열에 없습니다.");
+            }
+        }
+    }
+*/
+
+/*  문제
     8개의 정수로 이루어진 배열을 생성하고, 1~50 사이의 랜덤 정수로 초기화하세요.
     배열을 정렬한 뒤, Arrays.binarySearch()를 사용해 사용자가 입력한 숫자(예: 42)를 찾아
     해당 숫자가 배열에 있는지, 있다면 어느 인덱스에 있는지 출력하세요.
