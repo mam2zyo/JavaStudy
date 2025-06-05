@@ -65,7 +65,7 @@ import java.util.Scanner;
 
 public class ArrayEx05 {
 
-    public static int[] getRotatedRight(int[] arr, int k) {
+    public static int[] rotatedRight(int[] arr, int k) {
 
         if (arr == null) {
             throw new IllegalArgumentException("Invalid argument : array is null");
@@ -105,7 +105,7 @@ public class ArrayEx05 {
         scanner.nextLine();
         scanner.close();
 
-        int[] result = getRotatedRight(arr, k);
+        int[] result = rotatedRight(arr, k);
         System.out.println("회전 후 배열: " + Arrays.toString(result));
     }
 }
