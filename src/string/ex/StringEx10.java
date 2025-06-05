@@ -136,38 +136,43 @@ public class StringEx10 {
     }
 
 
-
-
-
     public static void main(String[] args) {
         String text = "Java is a powerful programming language. " +
                 "Programming with Java is fun and level up your skills. " +
                 "A good programmer never stops learning.";
 
-        System.out.println("=== 문자열 분석 보고서 ===");
-        System.out.println("총 문자 수: " + countChar(text));
-        System.out.println("총 단어 수: " + countWord(text));
-        System.out.println("총 문장 수: " + countSentence(text));
+        StringBuilder report = new StringBuilder();
+
+        report.append("=== 문자열 분석 보고서 ===\n")
+                .append("총 문자 수: ").append(countChar(text)).append("\n")
+                .append("총 단어 수: ").append(countWord(text)).append("\n")
+                .append("총 문장 수: ").append(countSentence(text)).append("\n")
+                .append("\n");
+
+        report.append("가장 많이 사용된 문자:")
+                .append("");
 
 //        가장 많이 사용된 문자:
 //        1. 'a' (12회)
 //        2. 'r' (10회)
 //        3. 'g' (8회)
 
+
         String longest = getLongestWord(text);
         String shortest = getShortestWord(text);
-
-        System.out.println("단어 분석:");
-        System.out.printf("가장 긴 단어: %s (%d글자)\n",
+        String formatted1 = String.format("가장 긴 단어: %s (%d글자)\n",
                 longest, longest.length());
-        System.out.printf("가장 짧은 단어: %s (%d글자)\n",
+        String formatted2 = String.format("가장 짧은 단어: %s (%d글자)\n",
                 shortest, shortest.length());
 
+        report.append("단어 분석:\n")
+                .append(formatted1).append("\n")
+                .append(formatted2).append("\n")
+                .append("\n");
 
-//
-//        단어 분석:
-//        가장 긴 단어: programming (11글자)
-//        가장 짧은 단어: A (1글자)
+        String palindromes =
+        report.append("회문 단어: ").append()
+
 //
 //        회문 단어: level
 //
